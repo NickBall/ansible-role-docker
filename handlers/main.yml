@@ -1,0 +1,14 @@
+---
+
+- name: start docker
+  service: name=docker state=started
+  sudo: yes
+
+- name: reload docker
+  service: name=docker state=reloaded
+  sudo: yes
+
+- name: restart docker
+  service: name=docker state=restarted
+  sudo: yes
+

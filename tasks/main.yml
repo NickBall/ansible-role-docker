@@ -1,0 +1,21 @@
+---
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
+
+#- include: redhat.yml
+#  when: ansible_os_family == 'RedHat'
+
+- name: Install docker compose
+  pip:
+    name: docker-compose
+    version: "{{ docker_compose_version if docker_compose_version else omit }}"
+    state: present
+  sudo: yes
+
+- name: Start + enable docker
+  service:
+    name=docker
+    state=started
+    enabled=yes
+  sudo: yes
+
